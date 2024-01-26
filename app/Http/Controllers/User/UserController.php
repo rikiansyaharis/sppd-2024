@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use DataTables;
 use Carbon\Carbon;
+use App\Models\Role;
 use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -45,4 +45,29 @@ class UserController extends Controller
         return DataTables::of($users)->make(true);
 
     }
+
+    public function create()
+    {
+        $data = [
+            'title' => 'Tambah Pengguna',
+            'breadcrumbs' => [
+                [
+                    'title' => 'Beranda',
+                    'url' => 'route("apps.dashboard")'
+                ],
+                [
+                    'title' => 'Pengguna',
+                    'url' => 'route("apps.users")'
+                ],
+                [
+                    'title' => 'Tambah Pengguna',
+                    'is_active' => true,
+                ],
+            ],
+            'roles' => Role::whereNotIn('name', ['Developer'])->get(),
+        ];
+
+        return view('user.form',$data);
+    }
+
 }

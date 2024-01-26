@@ -14,7 +14,8 @@ $(document).ready(function() {
                 `);
             }
         },
-        "responsive": true,
+        bFilter: true,
+        responsive: true,
         processing: true,
         serverSide: true,
         ajax: '/apps/users/get-data',
@@ -32,7 +33,7 @@ $(document).ready(function() {
             },
             {
                 title: 'Nama',
-                data: null,
+                data: 'username',
                 name: null,
                 mRender: (data, type, row) => {
                     return `
@@ -50,7 +51,7 @@ $(document).ready(function() {
             },
             {
                 title: 'Role',
-                data: null,
+                data: 'roles',
                 name: 'id',
                 mRender: (data, type, row, meta) => {
                     return row.roles[0].name
@@ -60,12 +61,14 @@ $(document).ready(function() {
                 title: 'Tanggal Aktivasi',
                 data: 'email_verified_at_display',
                 name: 'email_verified_at',
+                searchable: false,
 
             },
             {
                 title: 'Status',
                 data: 'is_active',
                 name: 'is_active',
+                searchable: false,
                 mRender: (data, type, row, meta) => {
                     return `<span class="badge bg-${data == true ? 'success' : 'danger'} text-uppercase">${data == true ? 'Aktif' : 'Tidak Aktif'}</span>`
                 }

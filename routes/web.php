@@ -27,6 +27,7 @@ Route::prefix('apps')->middleware('auth')->group( function() {
     Route::prefix('users')->group( function() {
         Route::get('',[UserController::class, 'index'])->name('apps.users');
         Route::get('get-data',[UserController::class, 'getData'])->name('apps.users.get-data');
+        Route::get('create',[UserController::class, 'create'])->name('apps.users.create');
     });
 
 });
